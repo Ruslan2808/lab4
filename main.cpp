@@ -15,7 +15,6 @@ public:
 };
 
 class Mammal :public Animal {
-private:
 	char* pt;
 	int age;
 public:
@@ -25,7 +24,6 @@ public:
 };
 
 class Fish :public Animal {
-private:
 	int kolplavn;
 	int ves; 
 public:
@@ -35,7 +33,6 @@ public:
 };
 
 class Bird :public Animal {
-private:
 	int razmah;
 	char* color;
 public:
