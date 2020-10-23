@@ -46,6 +46,7 @@ public:
 
 int menu();
 int getInt();
+string writeWords();
 
 int main() {
 	setlocale(LC_ALL, "rus");
@@ -58,11 +59,14 @@ int main() {
 		vib = menu();
 		if (vib == 0) {
 			cout << "Название: ";
-			cin.getline(nam, 80, '\n');
+			string nam1 = writeWords();
+			strcpy_s(nam, nam1.c_str());
 			cout << "Место обитания: ";
-			cin.getline(mesto, 80, '\n');
+			string mesto1 = writeWords();
+			strcpy_s(mesto, mesto1.c_str());
 			cout << "Введите тип питания: ";
-			cin.getline(tp, 80, '\n');
+			string tp1 = writeWords();
+			strcpy_s(tp, tp1.c_str());
 			cout << "Продолжительность жизни(лет): ";
 			pr = getInt();
 			Mammal ml(nam, mesto, tp, pr);
@@ -70,9 +74,11 @@ int main() {
 		}
 		else if (vib == 1) {
 			cout << "Название: ";
-			cin.getline(nam, 80, '\n');
+			string nam1 = writeWords();
+			strcpy_s(nam, nam1.c_str());
 			cout << "Место обитания: ";
-			cin.getline(mesto, 80, '\n');
+			string mesto1 = writeWords();
+			strcpy_s(mesto, mesto1.c_str());
 			cout << "Количество плавников: ";
 			kol = getInt();
 			cout << "Вес(гр): ";
@@ -83,13 +89,16 @@ int main() {
 		else if (vib == 2) {
 			cin.clear();
 			cout << "Название: ";
-			cin.getline(nam, 80, '\n');
+			string nam1 = writeWords();
+			strcpy_s(nam, nam1.c_str());
 			cout << "Место обитания: ";
-			cin.getline(mesto, 80, '\n');
+			string mesto1 = writeWords();
+			strcpy_s(mesto, mesto1.c_str());
 			cout << "Размах крыльев(см): ";
 			rz = getInt();
 			cout << "Цвет: ";
-			cin.getline(clr, 80, '\n');
+			string clr1 = writeWords();
+			strcpy_s(clr, clr1.c_str());
 			Bird bd(nam, mesto, rz, clr);
 			bd.show();
 		}
@@ -228,4 +237,30 @@ int getInt() {
 	}
 	cout << endl;
 	return stoi(numbers);
+}
+
+string writeWords() {
+	string word;
+	int Knopka;
+	char simvol;
+	while (true) {
+		Knopka = _getch();
+		if (Knopka == 8) {
+			if (word.length() != 0) {
+				cout << '\b' << " " << '\b';
+				word.erase(word.length() - 1);
+			}
+		}
+		else
+			if (Knopka == 13 && word.length() != 0) break;
+			else {
+				simvol = (char)Knopka;
+				if ((simvol >= 'а' && simvol <= 'я') || (simvol >= 'А' && simvol <= 'Я') || simvol == '-' || simvol == ' ' || simvol == '.') {
+					word = word + simvol;
+					cout << simvol;
+				}
+			}
+	}
+	cout << endl;
+	return word;
 }
